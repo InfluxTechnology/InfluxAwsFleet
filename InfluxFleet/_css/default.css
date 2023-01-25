@@ -1,0 +1,477 @@
+/* CSS Document */
+html, body {
+    background-color: #F5F5F5; /*#E8F1FF;*/
+    padding: 0px;
+    margin: 0px;
+    text-align: left;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+body {
+    padding-left: 310px;
+}
+
+input, button, textarea, select {
+    font-family: inherit;
+}
+
+#form600px {
+    width: 600px;
+    position: relative;
+    padding-top: 50px;
+    left: 50%;
+    margin-left: -300px;
+}
+
+    #form600px div#row {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    #form600px div#row_error {
+        margin-bottom: 20px;
+        text-align: center;
+        width: 600px;
+        font-size: 12px;
+        color: #f00;
+    }
+
+    #form600px .labels {
+        float: left;
+        text-align: right;
+        padding-right: 10px;
+        width: 200px;
+        height: 22px;
+        line-height: 22px;
+        white-space: nowrap;
+    }
+
+    #form600px .fields {
+        border: 1px solid #84A9E0;
+        width: 390px;
+        height: 22px;
+        font-size: 14px;
+        color: #333;
+        margin: 0px;
+    }
+
+    #form600px .influxmail {
+        border: 1px solid #84A9E0;
+        width: 225px;
+        height: 22px;
+        font-size: 14px;
+        color: #333;
+        margin: 0px;
+    }
+
+    #form600px .submit {
+        float: right;
+        margin-left: 10px;
+    }
+
+    #form600px .hidden {
+        display: none;
+    }
+
+    #form600px textarea.fields {
+        border: 1px solid #84A9E0;
+        width: 390px;
+        height: 110px;
+        font-size: 14px;
+        color: #333;
+        margin: 0px;
+    }
+
+div#leftnav {
+    background-image: url("/_img/logo.png");
+    background-repeat: no-repeat;
+    background-position: center 10px;
+    background-size: 100%;
+    background-color: #29495F;
+    color: #FFFFFF;
+    width: 310px;
+    height: 100%;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 100px;
+}
+
+    div#leftnav a, div#leftnav a:visited {
+        text-decoration: none;
+        color: #FFFFFF;
+    }
+
+        div#leftnav a:hover {
+            color: #f5f5f5;
+            background-color: #1C313F;
+        }
+
+    div#leftnav div.caption {
+        margin: 60px 0 10px 5px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #FEFEFE;
+    }
+
+    div#leftnav div#loggerlist ul {
+        display: block;
+        list-style: none;
+        padding: 0;
+        margin: 5px 0 0 0;
+        box-sizing: border-box;
+    }
+
+        div#leftnav div#loggerlist ul li {
+            display: block;
+            list-style: none;
+            margin: 0;
+            font-size: 16px;
+            letter-spacing: 0.025em;
+            padding: 15px 0 15px 10px;
+        }
+
+            div#leftnav div#loggerlist ul li:hover, div#leftnav div#loggerlist ul li.selected {
+                background-color: #1C313F;
+            }
+
+            div #leftnav div#loggerlist ul li a, div#leftnav div#loggerlist ul li a:visited {
+                display: block;
+                text-decoration: none;
+                color: #FFFFFF;
+            }
+
+                div#leftnav div#loggerlist ul li a:hover {
+                    display: block;
+                    color: #f5f5f5;
+                    background-color: #1C313F;
+                }
+
+div #content {
+    background-color: #FFFFFF;
+    height: 100%;
+    left: 200px;
+    position: relative;
+}
+
+input, button, textarea, select {
+    font-family: inherit;
+}
+
+div#navigation {
+    background-color: #29495F;
+    margin: 0px;
+    padding: 5px;
+    height: 40px;
+}
+
+    div#navigation a {
+        background-color: #F5F5F5;
+        font-size: 16px;
+        font-weight: bold;
+        color: #344C16; /*#66962B;*/
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        border-bottom: 2px solid #29495F;
+        margin: 16px 6px 0px 6px;
+        padding: 3px 15px 5px 15px;
+        float: left;
+        display: inline-block;
+    }
+
+        div#navigation a.selected {
+            border-bottom: 2px solid #F5F5F5;
+        }
+
+div #subpages {
+    text-align: center;
+}
+
+    div#subpages a {
+        margin: 0px 10px;
+    }
+
+div#info {
+    width: 88%;
+    margin: 20px 5%;
+    padding: 1%;
+    font-size: 12px;
+    border: double #D80000;
+}
+
+div#caption {
+    margin: 20px 0 10px 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #344C16; /*#66962B;*/
+}
+
+a, a:visited {
+    text-decoration: none;
+    color: #828282;
+}
+
+    a:hover {
+        color: #66962B;
+    }
+
+    a.size16 {
+        line-height: 22px;
+        font-size: 12px;
+        height: 22px;
+    }
+
+        a.size16 img {
+            float: left;
+            margin-top: 4px;
+            margin-right: 5px;
+        }
+
+label, label:visited {
+    color: #828282;
+    cursor: pointer;
+    font-size: 90%;
+}
+
+    label:hover {
+        color: #66962B;
+    }
+
+img {
+    border: 0px;
+}
+
+a img {
+    margin: -1px 4px 0px 2px;
+    vertical-align: middle;
+}
+
+div.clearboth {
+    clear: both;
+}
+
+div.box {
+    border: 2px solid #B0D487;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    color: #828282;
+    margin: 0px 10px 10px 0px;
+    float: left;
+    display: inline-block;
+    overflow: hidden;
+}
+
+    div.box div.caption {
+        background-color: #B0D487;
+        color: #344C16;
+        font-size: 100%;
+        font-weight: bold;
+        padding: 3px 10px 3px 5px;
+    }
+
+    div.box div.value {
+        font-size: 150%;
+        font-weight: bold;
+        color: #66962B;
+        text-align: center;
+        padding: 0px 40px 0px 40px;
+        margin: 45px 0px 45px -40px;
+        width: 100%;
+    }
+
+.search {
+    float: right;
+    width: 300px;
+}
+
+.uploadlink {
+    display: none;
+}
+
+span.pages {
+    color: #2A568E;
+}
+
+span#empty16 {
+    margin-left: 22px;
+}
+
+#loggercontainer {
+    position: relative;
+    top: 10px;
+    left: 2%;
+    width: 96%;
+    font-size: 14px;
+}
+
+#dashboardcontainer {
+    position: relative;
+    top: 30px;
+    left: 2%;
+    width: 96%;
+    font-size: 14px;
+}
+
+#loggerstatus {
+    top: 30px;
+    float: left;
+    display: inline-block;
+}
+
+#loggersnapshot {
+    margin: 0px;
+    float: left;
+    display: inline-block;
+    overflow: hidden;
+    width: 96%;
+}
+
+#loggersnapshotright {
+    margin: 0px 0px 0px 20px;
+    float: left;
+    display: inline-block;
+    overflow: hidden;
+    width: calc(96% - 500px);
+}
+
+    #loggersnapshotright div.box div.value {
+        padding: 0px 20px 0px 20px;
+        margin: 15px 0px 15px -20px;
+    }
+
+
+table.DataTable {
+    width: 100%;
+    border: 1px thin #F0F0F0;
+    border-spacing: 0px 5px;
+    border-collapse: separate;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+    table.DataTable a, table.DataTable a:visited {
+        text-decoration: none;
+        color: #828282;
+    }
+
+        table.DataTable a:hover {
+            color: #0FBB3C;
+        }
+
+        table.DataTable a.size16 {
+            line-height: 22px;
+            font-size: 12px;
+            height: 22px;
+        }
+
+            table.DataTable a.size16 img {
+                float: left;
+                margin-top: 4px;
+                margin-right: 5px;
+            }
+
+    table.DataTable td {
+        padding: 15px;
+        font-size: 80%;
+        font-weight: 500;
+        color: #828282;
+        white-space: nowrap;
+        vertical-align: top;
+        border-top: 1px solid #B0D487;
+        border-bottom: 1px solid #89A56A;
+    }
+
+        table.DataTable td:first-child {
+            border-left: 1px solid #B0D487;
+            border-top-left-radius: 3px;
+        }
+
+        table.DataTable td:last-child {
+            border-right: 1px solid #B0D487;
+            border-top-right-radius: 3px;
+        }
+
+        table.DataTable td div {
+            vertical-align: top;
+        } 
+
+        table.DataTable td#controls {
+            width: 0px;
+        }
+
+    table.DataTable tr#top td {
+        font-size: 95%;
+        font-weight: bold;
+        color: #686868;
+        border: none;
+        padding: 4px 0px 2px 7px;
+    }
+
+    table.DataTable tr#row1 td {
+        background-color: #FEFEFE;
+        padding: 4px 0px 2px 7px;
+    }
+
+    table.DataTable tr#row2 td {
+        background-color: #FEFEFE;
+        padding: 4px 0px 2px 7px;
+    }
+
+    table.DataTable tr#row1blocked td {
+        padding: 4px 0px 2px 7px;
+        color: #CCCCCC;
+    }
+
+    table.DataTable tr#row2blocked td {
+        padding: 4px 0px 2px 7px;
+        color: #CCCCCC;
+    }
+
+    table.DataTable .fields {
+        border: 1px solid #84A9E0;
+        width: 100px;
+        height: 16px;
+        font-size: 90%;
+        color: #333;
+        margin: 0px;
+        padding: 0px 3px 0px 3px;
+        vertical-align: top;
+    }
+
+    table.DataTable .hidden {
+        display: none;
+    }
+
+    table.DataTable form {
+        padding: 0px;
+        margin: 0px;
+    }
+
+        table.DataTable form.date {
+            padding: 0px;
+            margin: 0px;
+            display: inline;
+        }
+
+        table.DataTable form .hidden {
+            display: none;
+        }
+
+    table.DataTable textarea.fields {
+        border: 1px solid #84A9E0;
+        width: 100px;
+        height: 16px;
+        font-size: 90%;
+        color: #333;
+        margin: 0px;
+        padding: 0px 3px 0px 3px;
+        vertical-align: top;
+    }
+
+.DataTable.loggerstatus {
+    width: 500px;
+    border-collapse: collapse;
+}
