@@ -40,9 +40,6 @@
     <Content Include="_func\influxHtml.js">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="_func\initialization.js">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="_js\func.js">
       <SubType>Code</SubType>
     </Content>

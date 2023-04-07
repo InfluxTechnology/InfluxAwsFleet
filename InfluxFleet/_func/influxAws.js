@@ -1,23 +1,59 @@
-var init = require("../_func/initialization.js");
 var AWS = require('aws-sdk');
-var _mainS3 = null;
+var sessionAws = {
+    instance: null,
+    credentials: null,
+}
+
+function GetAwsCredentials() {
+    if (process.env.AWS_ACCESS_KEY != null)
+        return {
+            AwsAccessKey: process.env.AWS_ACCESS_KEY,
+            AwsSecretKey: process.env.AWS_SECRET_KEY,
+            AwsRegion: process.env.AWS_REGION,
+            AwsBucket: process.env.AWS_BUCKET,
+            AwsS3ApiVersion: '2006-03-01',
+        }
+    else
+        return sessionAws.credentials;
+}
 
 function GetS3Instance() {
-    if (_mainS3 == null) {
-        AWS.config.update({ accessKeyId: init.AwsAccessKey, secretAccessKey: init.AwsSecretKey, region: init.AwsRegion });
-        _mainS3 = new AWS.S3({ apiVersion: init.AwsS3ApiVersion });
+    if (sessionAws.instance == null) {
+        sessionAws.credentials = GetAwsCredentials();
+        AWS.config.update({
+            accessKeyId: sessionAws.credentials.AwsAccessKey,
+            secretAccessKey: sessionAws.credentials.AwsSecretKey,
+            region: sessionAws.credentials.AwsRegion
+        });
+        sessionAws.instance = new AWS.S3({ apiVersion: sessionAws.credentials.AwsS3ApiVersion });
     }
-    return _mainS3;
+    return sessionAws.instance;
 }
 
 module.exports = {
-
+    credentials: sessionAws.credentials,
+    SetSession: function (session) {
+        sessionAws.credentials = session.credentials;
+        GetS3Instance();
+    },
+    DestroySession: function () {
+        sessionAws.credentials = null;
+        sessionAws.instance = null;
+    },
+    validconfig: async function () {
+        s3 = GetS3Instance();
+        try {
+            await s3.headBucket({ Bucket: sessionAws.credentials.AwsBucket }).promise();
+            return true;
+        }
+        catch { return false; }
+    },
     objects: async function (path) {
         s3 = GetS3Instance();
 
         let prefix = path ? path + '/' : '';
         var bucketParams = {
-            Bucket: init.AwsBucket,
+            Bucket: sessionAws.credentials.AwsBucket,
             Delimiter: '/',
             Prefix: prefix,
         };
@@ -55,7 +91,7 @@ module.exports = {
         s3 = GetS3Instance();
 
         var bucketParams = {
-            Bucket: init.AwsBucket,
+            Bucket: sessionAws.credentials.AwsBucket,
             Key: path,
         };
 
@@ -69,7 +105,7 @@ module.exports = {
         s3 = GetS3Instance();
 
         var bucketParams = {
-            Bucket: init.AwsBucket,
+            Bucket: sessionAws.credentials.AwsBucket,
             Key: path,
         };
 
@@ -82,7 +118,7 @@ module.exports = {
         s3 = GetS3Instance();
 
         var bucketParams = {
-            Bucket: init.AwsBucket,
+            Bucket: sessionAws.credentials.AwsBucket,
             Key: path,
         };
 
@@ -100,7 +136,7 @@ module.exports = {
         s3 = GetS3Instance();
 
         var bucketParams = {
-            Bucket: init.AwsBucket,
+            Bucket: sessionAws.credentials.AwsBucket,
             Key: path,
             Body: stream
         };

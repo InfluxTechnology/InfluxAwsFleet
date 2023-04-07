@@ -68,24 +68,36 @@ module.exports = {
 		'</body>\n' +
 		'</html>',
 
-    uploadform: function (name) {
+    uploadform: function (name, target = null) {
+        target = (target == null) ? "" : "action='" + target + "'";
         var html =
             "<label for='upload_" + name + "'>Upload new " + name + "</label>" +
-            "<form method='post' enctype='multipart/form-data'>" +
+            "<form method='post' enctype='multipart/form-data' " + target + ">" +
             "<input id='upload_" + name + "' class='uploadlink' type='file' name='" + name + "' onchange='this.form.submit()' >" +
             "</form>";
 
         return html;
     },
 
+    inputfield: function (label, name, value, focus = false) {
+        focus = (focus) ? " autofocus" : "";
+        return "<div id='row'><div id='" + name + "_l' class='labels'>" + label + ":</div><input id='" + name + "_f' class='fields' type='text' name='" + name + "' value='" + value + "'" + focus + "></div><div class='clearboth'></div>\n";
+    },
+
+    inputpasswordfield: function (label, name, value, focus = false) {
+        focus = (focus) ? " autofocus" : "";
+        return "<div id='row'><div id='" + name + "_l' class='labels'>" + label + ":</div><input id='" + name + "_f' class='fields' type='password' name='" + name + "' value='" + value + "'" + focus + "></div><div class='clearboth'></div>\n";
+    },
+
 	navigation: function (jsLoggers, selected) {
-		var html =
-			'    <div id="leftnav">\n' +
-            '        <div id="loggerlist">\n' +
-            '        <div class="caption">Vehicles</div>\n';
+        var html =
+            '    <div id="leftnav">\n' +
+            '        <div id="loggerlist">\n';
         
         if (jsLoggers != null) {
-            html += '<ul>\n';
+            html +=
+                '        <div class="caption">Vehicles</div>\n' +
+                '<ul>\n';
             for (jid = 0; jid < jsLoggers.length; jid++)
                 for (var index = 0; index < jsLoggers[jid][folderContainer].length; index++) {
                     key = jsLoggers[jid][folderContainer][index][folderLinkKey];
@@ -95,7 +107,8 @@ module.exports = {
             html += '</ul>\n';
         }
 		html +=
-			'        </div >\n' +
+            '        </div >\n' +
+            '        <div class="logout"><a href="/logout">Logout</a></div>' +
 			'    </div>\n';
 
 		return html;

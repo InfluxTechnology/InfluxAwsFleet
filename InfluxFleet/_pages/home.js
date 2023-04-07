@@ -1,7 +1,7 @@
 var influxHtml = require('../_func/influxHtml.js');
 
 module.exports = {
-    html: async function (path, jsLoggers) {
+    html: async function (req, path, jsLoggers) {
         var html =
             "<div id='navigation'></div>\n" +
             "<div id='dashboardcontainer'>\n" +
