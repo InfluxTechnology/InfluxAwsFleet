@@ -117,6 +117,7 @@ module.exports = {
                     "<div id='caption'>Device information</div>\n";
 
                 var jsonStatus = null;
+                console.log(folder);
                 if (data = await influxAws.getfile(folder + "/Status.json"))
                     jsonStatus = JSON.parse(data);
                 html += influxHtml.vehicleinfo(jsonStatus, statusFields);

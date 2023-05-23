@@ -49,25 +49,31 @@ async function ShowPage(req, res) {
     var pathArr = req.url.split('/');
     var page = pathArr.length > 1 ? pathArr[1] : 'home';
 
-    if (sessionData.aws == null || page == 'logout') {
-        if (page != 'login') {
-            influx.DestroySession();
-            req.session.destroy();
-            res.writeHead(302, { 'Location': '/login' });
-            res.end();
-            return;
-        }
+    var hascredentials = false;
+    if (process.env.AWS_ACCESS_KEY != null) {
+        hascredentials = await influx.validconfig();
     }
-    else {
-        influx.SetSession(sessionData.aws);
-        var valid = await influx.validconfig();
-        if (!valid)
-        {
-            influx.DestroySession();
-            req.session.destroy();
-            res.writeHead(302, { 'Location': '/login' });
-            res.end();
-            return;
+
+    if (!hascredentials) {
+        if (sessionData.aws == null || page == 'logout') {
+            if (page != 'login') {
+                influx.DestroySession();
+                req.session.destroy();
+                res.writeHead(302, { 'Location': '/login' });
+                res.end();
+                return;
+            }
+        }
+        else {
+            influx.SetSession(sessionData.aws);
+            var valid = await influx.validconfig();
+            if (!valid) {
+                influx.DestroySession();
+                req.session.destroy();
+                res.writeHead(302, { 'Location': '/login' });
+                res.end();
+                return;
+            }
         }
     }
 
@@ -92,11 +98,11 @@ async function ShowPage(req, res) {
         var jsLoggers;
 
         var content = html.header;
-        if (sessionData.aws == null)
-            content += html.navigation(null);
+        if (sessionData.aws == null && !hascredentials)
+            content += html.navigation(null, null, !hascredentials);
         else {
             jsLoggers = await influx.objects(null);
-            content += html.navigation(jsLoggers, pathArr[3]);
+            content += html.navigation(jsLoggers, pathArr[3], !hascredentials);
         }
         content +=
             await pg.html(req, pathArr, jsLoggers) +

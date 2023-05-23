@@ -68,6 +68,11 @@ module.exports = {
 		'</body>\n' +
 		'</html>',
 
+    folderContainer: folderContainer,
+    folderLinkKey: folderLinkKey,
+    fileContainer: fileContainer,
+    fileLinkKey: fileLinkKey,
+
     uploadform: function (name, target = null) {
         target = (target == null) ? "" : "action='" + target + "'";
         var html =
@@ -89,13 +94,14 @@ module.exports = {
         return "<div id='row'><div id='" + name + "_l' class='labels'>" + label + ":</div><input id='" + name + "_f' class='fields' type='password' name='" + name + "' value='" + value + "'" + focus + "></div><div class='clearboth'></div>\n";
     },
 
-	navigation: function (jsLoggers, selected) {
+    navigation: function (jsLoggers, selected, showlogout) {
         var html =
-            '    <div id="leftnav">\n' +
-            '        <div id="loggerlist">\n';
-        
+            '    <div id="leftnav">\n';
+
         if (jsLoggers != null) {
             html +=
+                '        <div class="home"><a href="/home">Dashboard</a></div>\n' +
+                '        <div id="loggerlist">\n' +
                 '        <div class="caption">Vehicles</div>\n' +
                 '<ul>\n';
             for (jid = 0; jid < jsLoggers.length; jid++)
@@ -105,13 +111,13 @@ module.exports = {
                 }
 
             html += '</ul>\n';
+            html += '        </div >\n';
         }
-		html +=
-            '        </div >\n' +
-            '        <div class="logout"><a href="/logout">Logout</a></div>' +
-			'    </div>\n';
+        if (showlogout)
+            html += '        <div class="logout"><a href="/logout">Logout</a></div>';
+        html += '    </div>\n';
 
-		return html;
+        return html;
     },
 
     vehiclecount: function (jsLoggers) {
@@ -220,6 +226,43 @@ module.exports = {
 
         html += "</table>\n";
         return html;
+    },
+
+    dashboardtable: function (jStats) {
+        const statusFields = {
+            "serial_number": "Serial number",
+            "fw_ver": "Firmware version",
+            "micro_type": "LPC type",
+            "config_name": "Configuration",
+            "config_GUID": "Configuration GUID",
+            "max_space_MB": "Max space",
+            "free_space_MB": "Free space",
+            "RTC_UNIX": "Device RTC"
+        }
+
+        var html =
+            "<br\><table class='DataTable'>\n" +
+            tblAddRow('top', statusFields, statusFields);
+
+        for (var i = 0; i < jStats.length; i++) {
+            rowid = i % 2 == 0 ? 'row1' : 'row2';
+            html += "<tr id='row1'>";
+            for (var key in statusFields) {
+                if (jStats[i][key]) {
+                    value = jStats[i][key];
+                    if (key == 'RTC_UNIX')
+                        value = (new Date(value * 1000)).toUTCString();
+                    else if (key == 'max_space_MB' || key == 'free_space_MB')
+                        value = humanFileSize(jStats[i][key] * 1024 * 1024);
+                    html += "<td>" + value + "</td>";
+                }
+            }
+            html += "</tr>\n";
+        }
+
+        html += "</table>\n";
+        return html;
+
     },
 
 }
